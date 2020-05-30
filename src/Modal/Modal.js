@@ -17,7 +17,7 @@ const Modal = ({ visible, onClose }) => {
     firstFocusableEl.focus();
     currentFocus = firstFocusableEl;
 
-    const onKeyDown = e => {
+    const handleFocus = e => {
       e.preventDefault();
       // if the focused element "lives" in your modal container then just focus it
       if (focusableEls.includes(e.target)) {
@@ -37,11 +37,11 @@ const Modal = ({ visible, onClose }) => {
       }
     };
 
-    document.addEventListener("focus", onKeyDown, true);
+    document.addEventListener("focus", handleFocus, true);
 
     return {
       onClose: () => {
-        document.removeEventListener("focus", onKeyDown);
+        document.removeEventListener("focus", handleFocus, true);
         prevFocusableElement.focus();
       }
     };
