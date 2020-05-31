@@ -37,15 +37,23 @@ const Modal = ({ visible, onClose }) => {
       }
     };
 
+    const handleEscPress = (e) => {
+      if (e.keyCode === 27) {
+        onClose(); 
+      }
+    }
+
     document.addEventListener("focus", handleFocus, true);
+    document.addEventListener("keydown", handleEscPress);
 
     return {
       onClose: () => {
         document.removeEventListener("focus", handleFocus, true);
+        document.removeEventListener("keydown", handleEscPress);
         prevFocusableElement.focus();
       }
     };
-  }, []);
+  }, [onClose]);
 
   useEffect(() => {
     if (!visible) return;
